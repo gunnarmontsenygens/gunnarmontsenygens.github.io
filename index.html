@@ -37,11 +37,11 @@
       padding: 80px 28px;
     }
 
-.hero {
-    text-align: center;
-    padding: 120px 0 100px;
-    animation: fadeUp 1s ease;
-}
+    .hero {
+        text-align: center;
+        padding: 120px 0 100px;
+        animation: fadeUp 1s ease;
+    }
 
     .hero h1 {
       font-size: clamp(3rem, 7vw, 5.8rem);
@@ -196,46 +196,42 @@
       font-size: 0.9rem;
       padding: 50px 0 20px;
     }
-
+    
     .profile-photo {
-    width: 180px;
-    height: 180px;
-
-    object-fit: cover;
-    object-position: center;
-
-    border-radius: 50%;
-
-    margin-bottom: 36px;
-
-    border: 5px solid rgba(255,255,255,0.85);
-
-    box-shadow:
-        0 12px 35px rgba(0,0,0,0.12),
-        0 0 0 1px rgba(255,255,255,0.6);
-
-    transition: transform .35s ease,
-                box-shadow .35s ease;
-}
-
-.profile-photo:hover {
-    transform: scale(1.03);
-    box-shadow:
-        0 18px 45px rgba(0,0,0,0.16),
-        0 0 0 1px rgba(255,255,255,0.8);
-}
+        width: 240px;
+        height: 240px;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 50%;
+        margin-bottom: 40px;
+        border: 6px solid rgba(255,255,255,0.95);
+        background: white;
+        box-shadow:
+            0 8px 24px rgba(0,0,0,.05),
+            0 20px 60px rgba(0,0,0,.10);
+        transition:
+            transform .35s cubic-bezier(.22,1,.36,1),
+            box-shadow .35s cubic-bezier(.22,1,.36,1);
+    }
+    
+    .profile-photo:hover {
+        transform: translateY(-4px) scale(1.015);
+        box-shadow:
+            0 12px 32px rgba(0,0,0,.07),
+            0 28px 70px rgba(0,0,0,.12);
+    }
   
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(25px);
+    @keyframes fadeUp {
+        from {
+            opacity: 0;
+            transform: translateY(25px);
+        }
+    
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
     
   </style>
