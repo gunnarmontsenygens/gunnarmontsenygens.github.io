@@ -477,72 +477,7 @@
   </style>
 </head>
 
-<script>
-  document.querySelectorAll('.media-carousel').forEach(carousel => {
-    const slides = Array.from(carousel.querySelectorAll('img, video'));
-    let index = 0;
-    let timer;
 
-    if (slides.length === 0) return;
-
-    slides[0].classList.add('active');
-
-    const left = document.createElement('button');
-    left.className = 'carousel-arrow left';
-    left.innerHTML = '‹';
-
-    const right = document.createElement('button');
-    right.className = 'carousel-arrow right';
-    right.innerHTML = '›';
-
-    const dots = document.createElement('div');
-    dots.className = 'carousel-dots';
-
-    slides.forEach((_, i) => {
-      const dot = document.createElement('button');
-      dot.className = 'carousel-dot';
-      if (i === 0) dot.classList.add('active');
-      dot.addEventListener('click', () => showSlide(i));
-      dots.appendChild(dot);
-    });
-
-    if (slides.length > 1) {
-      carousel.appendChild(left);
-      carousel.appendChild(right);
-      carousel.appendChild(dots);
-    }
-
-    function showSlide(newIndex) {
-      slides[index].classList.remove('active');
-      if (slides[index].tagName === 'VIDEO') slides[index].pause();
-
-      index = (newIndex + slides.length) % slides.length;
-
-      slides[index].classList.add('active');
-      if (slides[index].tagName === 'VIDEO') slides[index].play();
-
-      dots.querySelectorAll('.carousel-dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === index);
-      });
-
-      restartTimer();
-    }
-
-    function nextSlide() {
-      showSlide(index + 1);
-    }
-
-    function restartTimer() {
-      clearInterval(timer);
-      timer = setInterval(nextSlide, 15000);
-    }
-
-    left.addEventListener('click', () => showSlide(index - 1));
-    right.addEventListener('click', () => showSlide(index + 1));
-
-    restartTimer();
-  });
-</script>
 
 <body>
 
@@ -743,5 +678,72 @@
     </footer>
 
   </main>
+
+  <script>
+  document.querySelectorAll('.media-carousel').forEach(carousel => {
+    const slides = Array.from(carousel.querySelectorAll('img, video'));
+    let index = 0;
+    let timer;
+
+    if (slides.length === 0) return;
+
+    slides[0].classList.add('active');
+
+    const left = document.createElement('button');
+    left.className = 'carousel-arrow left';
+    left.innerHTML = '‹';
+
+    const right = document.createElement('button');
+    right.className = 'carousel-arrow right';
+    right.innerHTML = '›';
+
+    const dots = document.createElement('div');
+    dots.className = 'carousel-dots';
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'carousel-dot';
+      if (i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => showSlide(i));
+      dots.appendChild(dot);
+    });
+
+    if (slides.length > 1) {
+      carousel.appendChild(left);
+      carousel.appendChild(right);
+      carousel.appendChild(dots);
+    }
+
+    function showSlide(newIndex) {
+      slides[index].classList.remove('active');
+      if (slides[index].tagName === 'VIDEO') slides[index].pause();
+
+      index = (newIndex + slides.length) % slides.length;
+
+      slides[index].classList.add('active');
+      if (slides[index].tagName === 'VIDEO') slides[index].play();
+
+      dots.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+
+      restartTimer();
+    }
+
+    function nextSlide() {
+      showSlide(index + 1);
+    }
+
+    function restartTimer() {
+      clearInterval(timer);
+      timer = setInterval(nextSlide, 15000);
+    }
+
+    left.addEventListener('click', () => showSlide(index - 1));
+    right.addEventListener('click', () => showSlide(index + 1));
+
+    restartTimer();
+  });
+</script>
 </body>
 </html>
