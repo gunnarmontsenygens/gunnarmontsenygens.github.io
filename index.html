@@ -3,6 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="description" content="Personal website of Gunnar Montseny Gens, M.S. Aerospace Engineering Sciences student at the University of Colorado Boulder. Research interests include astrodynamics, celestial mechanics, dynamical systems, space systems, and human spaceflight.">
+  <meta name="author" content="Gunnar Montseny Gens">
+  <meta name="robots" content="index, follow">
+
   <title>Gunnar Montseny Gens</title>
 
   <style>
@@ -19,6 +24,10 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
@@ -31,6 +40,39 @@
       line-height: 1.6;
     }
 
+    .navbar {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+
+      display: flex;
+      align-items: center;
+      gap: 22px;
+
+      padding: 12px 22px;
+      border-radius: 999px;
+
+      background: rgba(255,255,255,0.72);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(24px);
+
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .navbar a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .navbar a:hover {
+      color: var(--blue);
+    }
+
     .container {
       max-width: 1100px;
       margin: 0 auto;
@@ -38,9 +80,33 @@
     }
 
     .hero {
-        text-align: center;
-        padding: 120px 0 100px;
-        animation: fadeUp 1s ease;
+      text-align: center;
+      padding: 120px 0 100px;
+      animation: fadeUp 1s ease;
+    }
+
+    .profile-photo {
+      width: 240px;
+      height: 240px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 50%;
+      margin-bottom: 40px;
+      border: 6px solid rgba(255,255,255,0.95);
+      background: white;
+      box-shadow:
+        0 8px 24px rgba(0,0,0,.05),
+        0 20px 60px rgba(0,0,0,.10);
+      transition:
+        transform .35s cubic-bezier(.22,1,.36,1),
+        box-shadow .35s cubic-bezier(.22,1,.36,1);
+    }
+
+    .profile-photo:hover {
+      transform: translateY(-4px) scale(1.015);
+      box-shadow:
+        0 12px 32px rgba(0,0,0,.07),
+        0 28px 70px rgba(0,0,0,.12);
     }
 
     .hero h1 {
@@ -55,7 +121,7 @@
       font-size: clamp(1.2rem, 2.5vw, 1.7rem);
       color: var(--muted);
       margin: 24px auto 34px;
-      max-width: 720px;
+      max-width: 760px;
     }
 
     .buttons {
@@ -90,6 +156,7 @@
 
     section {
       margin-top: 80px;
+      scroll-margin-top: 100px;
     }
 
     .section-title {
@@ -127,11 +194,13 @@
       min-height: 270px;
       backdrop-filter: blur(24px);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      transition:
+        transform .45s cubic-bezier(.22,1,.36,1),
+        box-shadow .45s cubic-bezier(.22,1,.36,1);
     }
 
     .card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-10px) scale(1.015);
       box-shadow: 0 28px 70px rgba(0, 0, 0, 0.1);
     }
 
@@ -179,6 +248,37 @@
       backdrop-filter: blur(20px);
     }
 
+    .timeline {
+      display: grid;
+      gap: 18px;
+    }
+
+    .timeline-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 24px 28px;
+      backdrop-filter: blur(24px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.05);
+    }
+
+    .timeline-item .year {
+      color: var(--blue);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .timeline-item h3 {
+      margin: 0;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .timeline-item p {
+      margin: 6px 0 0;
+      color: var(--muted);
+    }
+
     .contact {
       text-align: center;
       color: var(--muted);
@@ -196,79 +296,110 @@
       font-size: 0.9rem;
       padding: 50px 0 20px;
     }
-    
-    .profile-photo {
-        width: 240px;
-        height: 240px;
-        object-fit: cover;
-        object-position: center;
-        border-radius: 50%;
-        margin-bottom: 40px;
-        border: 6px solid rgba(255,255,255,0.95);
-        background: white;
-        box-shadow:
-            0 8px 24px rgba(0,0,0,.05),
-            0 20px 60px rgba(0,0,0,.10);
-        transition:
-            transform .35s cubic-bezier(.22,1,.36,1),
-            box-shadow .35s cubic-bezier(.22,1,.36,1);
-    }
-    
-    .profile-photo:hover {
-        transform: translateY(-4px) scale(1.015);
-        box-shadow:
-            0 12px 32px rgba(0,0,0,.07),
-            0 28px 70px rgba(0,0,0,.12);
-    }
-  
+
     @keyframes fadeUp {
-        from {
-            opacity: 0;
-            transform: translateY(25px);
-        }
-    
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    
+    @media (max-width: 700px) {
+      .navbar {
+        gap: 14px;
+        padding: 10px 16px;
+        max-width: calc(100% - 24px);
+        overflow-x: auto;
+      }
+
+      .navbar a {
+        font-size: 0.85rem;
+      }
+
+      .container {
+        padding: 70px 22px;
+      }
+
+      .hero {
+        padding: 100px 0 80px;
+      }
+
+      .profile-photo {
+        width: 190px;
+        height: 190px;
+      }
+    }
   </style>
 </head>
 
 <body>
+
+  <nav class="navbar">
+    <a href="#about">About</a>
+    <a href="#research">Research</a>
+    <a href="#projects">Projects</a>
+    <a href="#timeline">Timeline</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
   <main class="container">
 
     <header class="hero">
+      <img src="IMG_1800.jpeg"
+           alt="Portrait of Gunnar Montseny Gens"
+           class="profile-photo">
 
-        <img src="IMG_1800.jpeg"
-             alt="Portrait of Gunnar Montseny Gens"
-             class="profile-photo">
-      
       <h1>Gunnar Montseny Gens</h1>
+
       <p>
-        M.S. Aerospace Engineering student at CU Boulder interested in
-        astrodynamics, celestial mechanics, dynamical systems, and space systems.
+        Developing mathematical and computational tools for astrodynamics,
+        celestial mechanics, and the future of human space exploration.
       </p>
 
       <div class="buttons">
         <a class="button" href="https://github.com/gunnarmontsenygens">GitHub</a>
         <a class="button secondary" href="https://www.linkedin.com/in/gunnarmontseny">LinkedIn</a>
+        <a class="button secondary" href="CV_Gunnar_Montseny_Gens.pdf">CV</a>
         <a class="button secondary" href="mailto:Gunnar.MontsenyGens@colorado.edu">Email</a>
       </div>
     </header>
 
-    <section>
+    <section id="about">
       <h2 class="section-title">About</h2>
       <div class="about">
         <p>
-          I’m a math and physics graduate currently pursuing a M.S. in Aerospace Engineering Sciences at the University of Colorado Boulder. I’m passionate about space exploration and eager to contribute to projects in astrodynamics, flight dynamics, GNC, human spaceflight, or Earth observation data analysis. My research has explored the Mars–Phobos system and the atmospheres of lava planets, and I’ve led a multidisciplinary team developing a lunar pressurized rover concept. I enjoy combining analytical modeling with creative problem-solving, and I’m especially drawn to astrodynamics and bioastronautics, including technologies that will make long-term Mars colonization possible (I'm currently a passionate member of the Rocky Mountains Mars Society Chapter).
+          I’m a mathematics and physics graduate currently pursuing an M.S. in
+          Aerospace Engineering Sciences at the University of Colorado Boulder.
+          I’m passionate about space exploration and eager to contribute to
+          projects in astrodynamics, flight dynamics, GNC, human spaceflight,
+          and Earth observation data analysis. My research has explored the
+          Mars–Phobos system and the atmospheres of lava planets, and I’ve led
+          a multidisciplinary team developing a lunar pressurized rover concept.
+          I enjoy combining analytical modeling with creative problem-solving,
+          and I’m especially drawn to astrodynamics and bioastronautics,
+          including technologies that will make long-term Mars settlement possible.
         </p>
       </div>
     </section>
 
-    <section>
+    <section id="research">
+      <h2 class="section-title">Current Research</h2>
+      <div class="about">
+        <p>
+          I am developing numerical tools for astrodynamics and studying the
+          geometry of phase space in Hamiltonian dynamical systems. My current
+          interests include periodic orbits, multi-body dynamics, symplectic
+          methods, and trajectory design for future space exploration.
+        </p>
+      </div>
+    </section>
+
+    <section id="projects">
       <h2 class="section-title">Featured Projects</h2>
 
       <div class="grid">
@@ -307,7 +438,7 @@
       </div>
     </section>
 
-    <section>
+    <section id="interests">
       <h2 class="section-title">Research Interests</h2>
 
       <div class="interests">
@@ -319,10 +450,42 @@
         <span class="pill">Trajectory Design</span>
         <span class="pill">Space Systems</span>
         <span class="pill">Human Spaceflight</span>
+        <span class="pill">Bioastronautics</span>
+        <span class="pill">Mars Exploration</span>
       </div>
     </section>
 
-    <section class="contact">
+    <section id="timeline">
+      <h2 class="section-title">Timeline</h2>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="year">2025–Present</div>
+          <h3>M.S. Aerospace Engineering Sciences</h3>
+          <p>University of Colorado Boulder</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="year">2025</div>
+          <h3>B.Sc. Mathematics &amp; B.Sc. Physics</h3>
+          <p>Universitat Autònoma de Barcelona</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="year">2024</div>
+          <h3>Exchange Student</h3>
+          <p>McGill University · Trottier Space Institute</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="year">2023–2025</div>
+          <h3>Head of Aerospace</h3>
+          <p>IBO Engineering · Lunar rover and electric aircraft concepts</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
       <p>
         <a href="mailto:Gunnar.MontsenyGens@colorado.edu">
           Gunnar.MontsenyGens@colorado.edu
@@ -339,7 +502,7 @@
     </section>
 
     <footer>
-      Last updated July 2026
+      © 2026 Gunnar Montseny Gens · Built with HTML &amp; CSS · Hosted on GitHub Pages
     </footer>
 
   </main>
