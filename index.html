@@ -27,17 +27,16 @@
     html {
       scroll-behavior: smooth;
     }
-
+    
     body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
-        "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background:
-        radial-gradient(circle at top left, #e8f1ff 0, transparent 35%),
-        radial-gradient(circle at top right, #f1e8ff 0, transparent 30%),
-        var(--bg);
-      color: var(--text);
-      line-height: 1.6;
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+            "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    
+        background: var(--bg);
+    
+        color: var(--text);
+        line-height: 1.6;
     }
 
     .navbar {
@@ -102,9 +101,45 @@
     }
 
     .hero {
-      text-align: center;
-      padding: 120px 0 100px;
-      animation: fadeUp 1s ease;
+        position: relative;
+    
+        text-align: center;
+    
+        padding: 170px 0 150px;
+    
+        animation: fadeUp 1s ease;
+    
+        background-image:
+            linear-gradient(
+                to bottom,
+                rgba(245,245,247,0.00) 0%,
+                rgba(245,245,247,0.08) 25%,
+                rgba(245,245,247,0.30) 50%,
+                rgba(245,245,247,0.65) 72%,
+                rgba(245,245,247,0.92) 90%,
+                rgba(245,245,247,1.00) 100%
+            ),
+            url("images/mars.png");
+    
+        background-size: cover;
+        background-position: center bottom;
+        background-repeat: no-repeat;
+    
+        margin: -80px -28px 0;
+        padding-left: 28px;
+        padding-right: 28px;
+    
+        border-radius: 0 0 60px 60px;
+    }
+    
+    .hero h1 {
+        text-shadow:
+            0 2px 15px rgba(255,255,255,.55);
+    }
+    
+    .hero p {
+        text-shadow:
+            0 2px 10px rgba(255,255,255,.65);
     }
 
     .profile-photo {
