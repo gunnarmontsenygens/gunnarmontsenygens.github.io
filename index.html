@@ -427,31 +427,120 @@
     .media-carousel video.active {
       opacity: 1;
     }
+    
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 5;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.45);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      color: var(--text);
+      cursor: pointer;
+    }
+    
+    .carousel-arrow.left {
+      left: 12px;
+    }
+    
+    .carousel-arrow.right {
+      right: 12px;
+    }
+    
+    .carousel-dots {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      display: flex;
+      gap: 7px;
+    }
+    
+    .carousel-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255,255,255,0.55);
+      cursor: pointer;
+    }
+    
+    .carousel-dot.active {
+      background: white;
+    }
   </style>
 </head>
 
 <script>
   document.querySelectorAll('.media-carousel').forEach(carousel => {
-    const slides = carousel.querySelectorAll('img, video');
+    const slides = Array.from(carousel.querySelectorAll('img, video'));
     let index = 0;
+    let timer;
 
-    if (slides.length <= 1) return;
+    if (slides.length === 0) return;
 
-    setInterval(() => {
+    slides[0].classList.add('active');
+
+    const left = document.createElement('button');
+    left.className = 'carousel-arrow left';
+    left.innerHTML = '‹';
+
+    const right = document.createElement('button');
+    right.className = 'carousel-arrow right';
+    right.innerHTML = '›';
+
+    const dots = document.createElement('div');
+    dots.className = 'carousel-dots';
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'carousel-dot';
+      if (i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => showSlide(i));
+      dots.appendChild(dot);
+    });
+
+    if (slides.length > 1) {
+      carousel.appendChild(left);
+      carousel.appendChild(right);
+      carousel.appendChild(dots);
+    }
+
+    function showSlide(newIndex) {
       slides[index].classList.remove('active');
+      if (slides[index].tagName === 'VIDEO') slides[index].pause();
 
-      if (slides[index].tagName === 'VIDEO') {
-        slides[index].pause();
-      }
-
-      index = (index + 1) % slides.length;
+      index = (newIndex + slides.length) % slides.length;
 
       slides[index].classList.add('active');
+      if (slides[index].tagName === 'VIDEO') slides[index].play();
 
-      if (slides[index].tagName === 'VIDEO') {
-        slides[index].play();
-      }
-    }, 12000);
+      dots.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+
+      restartTimer();
+    }
+
+    function nextSlide() {
+      showSlide(index + 1);
+    }
+
+    function restartTimer() {
+      clearInterval(timer);
+      timer = setInterval(nextSlide, 15000);
+    }
+
+    left.addEventListener('click', () => showSlide(index - 1));
+    right.addEventListener('click', () => showSlide(index + 1));
+
+    restartTimer();
   });
 </script>
 
@@ -587,7 +676,7 @@
         <div class="card">
 
           <div class="media-carousel">
-            <img src="images/sports/IMG_0992.JPG" class = "active" alt="Volleyball">
+            <img src="images/sports/IMG_0992.JPG" alt="Volleyball">
             <img src="images/sports/PHOTO-2021-05-17-19-36-15.jpg" alt="Volleyball">
           </div>
           
