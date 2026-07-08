@@ -471,46 +471,6 @@
       transform: translateY(-50%) scale(1.1);
     }
     
-    ..carousel-dots {
-  position: absolute;
-  bottom: 14px;
-  left: 50%;
-  transform: translateX(-50%);
-
-  display: flex;
-  gap: 8px;
-
-  opacity: 0;
-
-  transition: opacity .45s ease;
-
-  z-index: 10;
-}
-
-.media-carousel:hover .carousel-dots {
-  opacity: 1;
-}
-
-.carousel-dot {
-  width: 6px;
-  height: 6px;
-
-  border-radius: 50%;
-  border: none;
-
-  background: rgba(255,255,255,.4);
-
-  cursor: pointer;
-
-  transition:
-      transform .25s ease,
-      background .25s ease;
-}
-
-.carousel-dot.active {
-  background: white;
-  transform: scale(1.35);
-}
   </style>
 </head>
 
@@ -734,21 +694,9 @@
     right.className = 'carousel-arrow right';
     right.innerHTML = '&#8250;';
 
-    const dots = document.createElement('div');
-    dots.className = 'carousel-dots';
-
-    slides.forEach((_, i) => {
-      const dot = document.createElement('button');
-      dot.className = 'carousel-dot';
-      if (i === 0) dot.classList.add('active');
-      dot.addEventListener('click', () => showSlide(i));
-      dots.appendChild(dot);
-    });
-
     if (slides.length > 1) {
       carousel.appendChild(left);
       carousel.appendChild(right);
-      carousel.appendChild(dots);
     }
 
     function showSlide(newIndex) {
@@ -760,9 +708,6 @@
       slides[index].classList.add('active');
       if (slides[index].tagName === 'VIDEO') slides[index].play();
 
-      dots.querySelectorAll('.carousel-dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === index);
-      });
 
       restartTimer();
     }
