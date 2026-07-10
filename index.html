@@ -28,24 +28,22 @@
       scroll-behavior: smooth;
     }
     
-    body {
-      position: relative;
-      min-height: 100vh;
-      margin: 0;
-    
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
-        "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    
-      color: var(--text);
-      line-height: 1.6;
-    
-      background-color: #b96542;
-      background-image: url("images/mars_vertical.png");
-      background-size: 100% auto;
-      background-position: top center;
-      background-repeat: no-repeat;
-      background-attachment: scroll;
-    }
+body{
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(245,245,247,0.15) 0%,
+            rgba(245,245,247,0.15) 65%,
+            rgba(120,58,38,0.30) 85%,
+            #7b3f2a 100%
+        ),
+        url("images/mars_vertical.webp");
+
+    background-size:100% auto;
+    background-repeat:no-repeat;
+    background-position:top center;
+    background-color:#7b3f2a;
+}
     
     body::before {
       content: "";
@@ -54,7 +52,7 @@
       z-index: -1;
       pointer-events: none;
     
-      background: rgba(245, 245, 247, 0.10);
+      background: rgba(245, 245, 247, 0.65);
     }
     .navbar {
       position: fixed;
